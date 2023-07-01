@@ -38,10 +38,12 @@
 - run in a console: `./run.sh`
 - or type in terminal either
 
-- Build / rebuild (delete or stop individually in docker desktop):
+- Build / rebuild (delete or stop web-1 individually in docker desktop):
+
 - `docker-compose build`
 
 - Start the two containers:
+
 - `docker compose up`
 
 # connect to docker container
@@ -58,6 +60,7 @@
 # Determine your machines mongodb dockercontainers machineinternal IP
 
 - Get gateway address of your mongo container replace IP <172.19.0.2>
+- Nodejs command to connect via mongoose (not needed):
 - `mongoose.connect('mongodb://root:example@172.19.0.2:27017/admin');`
 
 # Access dockercontainers linux shell
