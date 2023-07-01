@@ -77,8 +77,8 @@
 # IMPORTANT: Set correct credetials, run as a must (in the linux shell of the container)
 - In Mongodb Compass create a DB with name `myfirstDatabase` with two Collections named `issues` and one `projects`
 - see the credentials defined in docker-compose.yml file!
-- `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'`
-- Enter in the shell
+- `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
+- In the shell type:
 ````
 use myFirstDatabase
 db.createUser(
