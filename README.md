@@ -3,7 +3,8 @@
 # prequisites
 
 - Have nodejs > v16 installed
-- Docker desktop installed
+- Docker desktop installed https://www.docker.com/products/docker-desktop/
+- Rest client e.g. POSTMAN https://www.postman.com/ (optional)
 
 # build
 
