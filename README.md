@@ -25,7 +25,7 @@
 - `npm install swagger-ui-express -save-dev`
 - `npm install uuid -save-dev`
 
-# mongodb official docker images
+# mongodb official docker images (optional)
 
 - Mongo documentation now official image also for ARM64 / Apple Silicon!
 - https://hub.docker.com/_/mongo
