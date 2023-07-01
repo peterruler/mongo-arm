@@ -34,7 +34,12 @@
 - `cd to this directory`
 - `chmod +x ./run.sh`
 - run in a console: `./run.sh`
+- or type in terminal either
+
+- Build / rebuild (delete or stop individually in docker desktop):
 - `docker-compose build`
+
+- Start the two containers:
 - `docker compose up`
 
 # connect to docker container
