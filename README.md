@@ -55,7 +55,7 @@
 
 - input the Connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
-- (Testing mongodb in https://studio3t.com tryout 30 days)
+- (Testing mongodb in https://studio3t.com tryout 30 days, obsolete)
 
 # Determine your machines mongodb dockercontainers machineinternal IP
 
