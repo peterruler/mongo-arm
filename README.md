@@ -71,7 +71,7 @@
 - `docker exec -it mongo-arm-mongo-container-1 bash`
 - `mongosh mongodb://localhost:27017`
 
-# Optional open config via nano in open dockercontainers' internal shell
+# Optional open config via nano in open dockercontainers' internal shell (optional)
 
 - Optional ():
 - (`apt-get update`)
