@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  web:
+    build: .
+    ports:
+    - "3000:3000"
+    depends_on:
+    - mongo-container
+  mongo-container:
+    image: mongo:latest
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=example
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # Here you are setting the username and password
+        # so change it to whatever you want
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ports:
+      - "27017:27017"
+    command: mongod
