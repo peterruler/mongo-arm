@@ -78,8 +78,8 @@ db.createUser(
 ````
 
 # Determine your mongodb containers Host IP something like 172.xx.0.2
-
-- `docker ps`
+ 
+- `docker ps` check the name of your container replace <mongo-arm-mongo-container-1> with your containers' name
 - `docker inspect mongo-arm-mongo-container-1 `
 - `Gateway IP is on my machine: 172.19.0.2 replace with youe environments IP`
 
