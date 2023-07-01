@@ -75,9 +75,10 @@ db.createUser(
     roles: [ "readWrite", "dbAdmin" ]
   }
 )
+````
 
 # Determine your mongodb containers Host IP something like 172.xx.0.2
-````
+
 - `docker ps`
 - `docker inspect mongo-arm-mongo-container-1 `
 - `Gateway IP is on my machine: 172.19.0.2 replace with youe environments IP`
@@ -90,10 +91,11 @@ db.createUser(
 MONGODB_URI=mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
 PORT=3000
 NODE_ENV=production
+`````
 
 # Test the api via REST Client
 
-`````
+
 - To test use a REST Client like https://paw.cloud/ or POSTMAN https://www.postman.com/:
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
