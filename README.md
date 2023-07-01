@@ -58,7 +58,7 @@
 - Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
 - (Testing mongodb in https://studio3t.com tryout 30 days, obsolete)
 
-# Determine your machines mongodb dockercontainers machineinternal IP
+# IMPORTANT: Determine your machines mongodb dockercontainers machineinternal IP
 
 - Get gateway address of your mongo container replace IP <172.19.0.2>
 - Nodejs command to connect via mongoose (not needed):
