@@ -106,7 +106,7 @@ db.createUser(
 # Content of nodejs' .env file
 
 - Need an .env rile in your projects root directory:
-- .env File content, replace <172.19.0.2> with conatiner gateway IP:
+- IMPORTANT in .env File content, replace `172.19.0.2` with containers local gateway IP:
 `````
 MONGODB_URI=mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
 PORT=3000
