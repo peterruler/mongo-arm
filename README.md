@@ -55,6 +55,7 @@
 
 - input the Connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
+- Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
 - (Testing mongodb in https://studio3t.com tryout 30 days, obsolete)
 
 # Determine your machines mongodb dockercontainers machineinternal IP
