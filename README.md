@@ -7,11 +7,13 @@
 
 # build
 
+- cd to this directory
 - To build first run a `npm install` or if you use yarn: `yarn install`
 
 # content of package.json
 
-- Needed nodjs packages:
+- Needed nodjs packages already installed after running `npm install`:
+
 - `npm install mongo --save-dev`
 - `npm install mongoose --save-dev`
 - `npm install express -save-dev`
@@ -34,10 +36,13 @@
 - `docker compose up`
 
 # connect to docker container
+
+- Replace <172.19.0.2> in the .env file with your localmachines gateway address (see futher down in this README)
 - Connectionstring: `mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
 
-- Mongodb client to test db
+# Mongodb client to test db
 
+- input the Connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
 - (Testing mongodb in https://studio3t.com tryout 30 days)
 
@@ -62,8 +67,9 @@
 - (`nano /etc/mongod.conf`) --> file doesn't exist, get correct filename
 
 
-# IMPORTANT: Set correct credetials, run as a must
+# IMPORTANT: Set correct credetials, run as a must (in the linux shell of the container)
 
+- see the credentials defined in docker-compose.yml file!
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'`
 - Enter in the shell
 ````
@@ -94,7 +100,6 @@ NODE_ENV=production
 `````
 
 # Test the api via REST Client
-
 
 - To test use a REST Client like https://paw.cloud/ or POSTMAN https://www.postman.com/:
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
