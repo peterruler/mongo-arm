@@ -76,6 +76,7 @@
 
 
 # IMPORTANT: Set correct credentials, run as a must (in the linux shell of the container)
+- Must grant user `root` with password `example` access to the `myfirstDatabase` Database!
 - In Mongodb Compass create a DB with name `myfirstDatabase` with two Collections named `issues` and one `projects`
 - see the credentials defined in docker-compose.yml file!
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
