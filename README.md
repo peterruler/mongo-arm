@@ -81,7 +81,7 @@
 - see the credentials defined in docker-compose.yml file!
 - `docker exec -it mongo-arm-mongo-container-1 bash` then:
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
-- In the shell type:
+- In the shell type this follwing full content:
 ````
 use myFirstDatabase
 db.createUser(
