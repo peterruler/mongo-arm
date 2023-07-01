@@ -31,6 +31,7 @@
 - https://hub.docker.com/_/mongo
 
 # build & start docker via docker compose
+
 - To start the docker image do following:
 - `cd to this directory`
 - `chmod +x ./run.sh`
