@@ -62,7 +62,7 @@
 # Access dockercontainers linux shell
 
 - Connect to the shell used to set credetials!
-- Replace with your container name <mongo-arm-mongo-container-1>:
+- Replace `mongo-arm-mongo-container-1` with your container name from `docker ps`:
 - In a terminal get on the containers linux:
 - `docker exec -it mongo-arm-mongo-container-1 bash`
 - `mongosh mongodb://localhost:27017`
