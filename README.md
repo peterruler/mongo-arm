@@ -13,7 +13,7 @@
 - first determine docker containers IP, see further down in this readme (stop web container, change, and rerun `./run.sh`)
 - see later in this readme run docker compose, or run: `docker-compose build` and `docker compose up`
 
-# content of package.json
+# content of package.json (optional)
 
 - Needed nodjs packages already installed after running `npm install`:
 
