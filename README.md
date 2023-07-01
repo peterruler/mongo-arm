@@ -9,6 +9,7 @@
 
 - cd to this directory
 - To build first run a `npm install` or if you use yarn: `yarn install`
+- first determine docker containers IP, see further down in this readme (stop web container, change, and rerun `./run.sh`)
 - see later in this readme run docker compose, or run: `docker-compose build` and `docker compose up`
 
 # content of package.json
