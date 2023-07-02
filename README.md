@@ -129,7 +129,7 @@ NODE_ENV=production
 # Test the api via REST client
 
 - To test use a REST client like https://paw.cloud/ or postman https://www.postman.com/:
-- In compass load Issues and test projects from _Projects folder in this repository.
+- In compass load issues and test projects from _Projects folder in this repository.
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
 - Sample API call POST http://localhost:3000/api/projects
