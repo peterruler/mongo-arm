@@ -64,20 +64,20 @@
 
 # Mongodb client to test db
 
-- input the Connectionstring
+- input the connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
 - Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
 - (Testing mongodb in https://studio3t.com tryout 30 days, obsolete)
 
 # IMPORTANT: Determine your machines mongodb dockercontainers machineinternal IP
 
-- Get gateway address of your mongo container replace IP <172.19.0.2>
+- Get gateway address of your mongo container replace ip <172.19.0.2>
 - Nodejs command to connect via mongoose (not needed):
 - `mongoose.connect('mongodb://root:example@172.19.0.2:27017/admin');`
 
 # Access dockercontainers linux shell
 
-- Connect to the shell used to set credetials!
+- Connect to the shell used to set credentials!
 - Replace `mongo-arm-mongo-container-1` with your container name from `docker ps`:
 - In a terminal get on the containers linux:
 - `docker exec -it mongo-arm-mongo-container-1 bash`
