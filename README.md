@@ -132,5 +132,5 @@ NODE_ENV=production
 - In compass load Issues and test projects from _Projects folder in this repository.
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
-- Sample API Call POST http://localhost:3000/api/projects
+- Sample API call POST http://localhost:3000/api/projects
 - `{ "id": 1, "client_id": "2222", "title": "Bar", "active": false }`
