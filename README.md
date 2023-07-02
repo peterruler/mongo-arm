@@ -2,7 +2,7 @@
 
 - Nodejs mongodb REST backend that uses docker / docker compose
 
-# Prequisites
+# Prerequisites
 
 - Have nodejs > v16 installed https://nodejs.org/en#download
 - Docker desktop installed https://www.docker.com/products/docker-desktop/
@@ -59,7 +59,7 @@
 
 # Connect to docker container
 
-- Replace <172.19.0.2> in the .env file with your localmachines gateway address (see futher down in this README)
+- Replace <172.19.0.2> in the .env file with your localmachines gateway address (see further down in this README)
 - Connectionstring: `mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
 
 # Mongodb client to test db
@@ -98,7 +98,7 @@
 - see the credentials defined in docker-compose.yml file!
 - `docker exec -it mongo-arm-mongo-container-1 bash` then:
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
-- In the shell type this follwing full content:
+- In the shell, please type this following full content:
 ````
 use myFirstDatabase
 db.createUser(
