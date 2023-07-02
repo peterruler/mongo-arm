@@ -1,19 +1,21 @@
 # mongo-arm
 
-# prequisites
+- Nodejs mongodb REST backend that uses docker / docker compose
+
+# Prequisites
 
 - Have nodejs > v16 installed https://nodejs.org/en#download
 - Docker desktop installed https://www.docker.com/products/docker-desktop/
-- Rest client e.g. POSTMAN https://www.postman.com/ (optional)
+- Rest client e.g. postman https://www.postman.com/ (optional)
 
-# build
+# Build
 
 - cd to this directory
 - To build first run a `npm install` or if you use yarn: `yarn install`
 - first determine docker containers IP, see further down in this readme (stop web container, change, and rerun `./run.sh`)
 - see later in this readme run docker compose, or run: `docker-compose build` and `docker compose up`
 
-# content of package.json (optional)
+# Content of package.json (optional)
 
 - Needed nodjs packages already installed after running `npm install`:
 
@@ -25,12 +27,12 @@
 - `npm install swagger-ui-express -save-dev`
 - `npm install uuid -save-dev`
 
-# mongodb official docker images (optional)
+# Mongodb official docker images (optional)
 
-- Mongo documentation now official image also for ARM64 / Apple Silicon!
+- Mongo documentation now official image also for arm64 / apple silicon!
 - https://hub.docker.com/_/mongo
 
-# build & start docker via docker compose
+# Build & start docker via docker compose
 
 - To start the docker image do following:
 - `cd to this directory`
@@ -38,7 +40,7 @@
 - run in a console: `./run.sh`
 - or type in terminal either
 
-- Build / rebuild (delete or stop web-1 individually in docker desktop):
+- Build / rebuild (delete or stop web-1 (Container_ID via `docker ps`) individually in docker desktop):
 
 - `docker-compose build`
 
@@ -46,7 +48,15 @@
 
 - `docker compose up`
 
-# connect to docker container
+# Stop & delete container
+
+- In a new terminal call
+- `docker ps` to get Container_ID
+- `docker stop <Container_ID>`
+- `docker rm <Container_ID>`
+- in a terminal call `docker ps` to get Container_ID
+
+# Connect to docker container
 
 - Replace <172.19.0.2> in the .env file with your localmachines gateway address (see futher down in this README)
 - Connectionstring: `mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
@@ -74,15 +84,16 @@
 
 # Optional open config via nano in open dockercontainers' internal shell (optional)
 
-- Optional ():
+- optional ():
 - (`apt-get update`)
 - (`apt-get install nano`)
 - (`nano /etc/mongod.conf`) --> file doesn't exist, get correct filename
 
 
 # IMPORTANT: Set correct credentials, run as a must (in the linux shell of the container)
-- Must grant user `root` with password `example` access to the `myfirstDatabase` Database!
-- In Mongodb Compass create a DB with name `myfirstDatabase` with two Collections named `issues` and one `projects`
+
+- Must grant user `root` with password `example` access to the `myfirstDatabase` database!
+- In mongodb compass create a db with name `myfirstDatabase` with two collections named `issues` and one `projects`
 - see the credentials defined in docker-compose.yml file!
 - `docker exec -it mongo-arm-mongo-container-1 bash` then:
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
@@ -98,23 +109,23 @@ db.createUser(
 )
 ````
 
-# Determine your mongodb containers Host IP something like 172.xx.0.2
+# Determine your mongodb containers host ip something like 172.xx.0.2
  
 - `docker ps` check the name of your container replace mongo-arm-mongo-container-1 with your containers' name
 - `docker inspect mongo-arm-mongo-container-1 `
-- `Gateway IP is on my machine: 172.19.0.2 replace with youe environments IP`
+- `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP`
 
 # Content of nodejs' .env file
 
 - Need an .env rile in your projects root directory:
-- IMPORTANT in .env File content, replace `172.19.0.2` with containers local gateway IP:
+- IMPORTANT in .env file content, replace `172.19.0.2` with containers local gateway ip:
 `````
 MONGODB_URI=mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
 PORT=3000
 NODE_ENV=production
 `````
 
-# Test the api via REST Client
+# Test the api via REST client
 
 - To test use a REST Client like https://paw.cloud/ or POSTMAN https://www.postman.com/:
 - In Compass load Issues and test Projects from _Projects folder in this repository.
