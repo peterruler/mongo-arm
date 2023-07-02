@@ -55,6 +55,7 @@
 - `docker stop <Container_ID>`
 - `docker rm <Container_ID>`
 - in a terminal call `docker ps` to get Container_ID
+- `docker compose up` to restart the web container
 
 # Connect to docker container
 
@@ -127,8 +128,8 @@ NODE_ENV=production
 
 # Test the api via REST client
 
-- To test use a REST Client like https://paw.cloud/ or POSTMAN https://www.postman.com/:
-- In Compass load Issues and test Projects from _Projects folder in this repository.
+- To test use a REST client like https://paw.cloud/ or postman https://www.postman.com/:
+- In compass load Issues and test projects from _Projects folder in this repository.
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
 - Sample API Call POST http://localhost:3000/api/projects
