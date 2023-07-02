@@ -114,7 +114,7 @@ db.createUser(
  
 - `docker ps` check the name of your container replace mongo-arm-mongo-container-1 with your containers' name
 - `docker inspect mongo-arm-mongo-container-1 `
-- `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP`
+- `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
 
 # Content of nodejs' .env file
 
