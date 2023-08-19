@@ -157,7 +157,7 @@ sudo docker stop mongo-arm_web_1
 
 sudo docker rm mongo-arm_web_1
 
-sudo docker-compose up
+sudo docker-compose up # note the difference to macos
 
 docker exec -it mongo-arm_mongo-container_1 bash 
 
