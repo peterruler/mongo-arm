@@ -6,6 +6,7 @@
 
 - Have nodejs > v16 installed https://nodejs.org/en#download
 - Docker desktop installed https://www.docker.com/products/docker-desktop/
+- Mongodb compass https://www.mongodb.com/try/download/compass
 - Rest client e.g. postman https://www.postman.com/ (optional)
 
 # Build
