@@ -98,7 +98,7 @@
 - see the credentials defined in docker-compose.yml file!
 - `docker exec -it mongo-arm-mongo-container-1 bash` then:
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
-- In the shell, please type this following full content:
+- In the shell, type this following full content:
 ````
 use myFirstDatabase
 db.createUser(
@@ -134,3 +134,115 @@ NODE_ENV=production
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
 - Sample API call POST http://localhost:3000/api/projects
 - `{ "id": 1, "client_id": "2222", "title": "Bar", "active": false }`
+
+# Demo on free tier oracle cloud arm quadcore
+
+https://keepitnative.xyz/
+
+# Installation Notes for Ubuntu Server
+```
+sudo apt-get remove docker docker-engine docker.io
+
+sudo apt-get update
+
+sudo apt install docker.io
+
+sudo apt install docker-compose
+```
+
+# Some commands differ to the ones on macos
+```
+sudo docker stop mongo-arm_web_1
+
+sudo docker rm mongo-arm_web_1
+
+sudo docker-compose up
+
+docker exec -it mongo-arm_mongo-container_1 bash 
+
+db.createCollection("issues")
+
+db.createCollection("projects")
+```
+# docker compose
+```
+#!/bin/bash
+sudo docker-compose build
+sudo docker-compose up #note this is different to macos m1
+sudo docker ps
+sudo docker inspect mongo-arm_mongo-container_1
+# 172.18.0.2
+- in .env file
+- `mongodb://root:example@172.18.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
+# dont forget to rebuild & rerun
+sudo docker-compose build
+sudo docker-compose up
+```
+# install services
+
+
+`cd /etc/systemd/system`
+
+`touch docker.mongo-arm_mongo-container.service`
+
+`vi docker.mongo-arm_mongo-container.service`
+
+Content:
+```
+[Unit]
+Description=mongo-arm_mongo-container_1 container
+After=docker.service
+Wants=network-online.target docker.socket
+Requires=docker.socket
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a mongo-arm_mongo-container_1
+ExecStop=/usr/bin/docker stop -t 10 mongo-arm_mongo-container_1
+
+[Install]
+WantedBy=multi-user.target
+```
+
+# to start stop service
+```
+# enable:
+sudo systemctl enable docker.mongo-arm_mongo-container.service
+# start / stop
+sudo service docker.docker.mongo-arm_mongo-container stop
+sudo service docker.mongo-arm_mongo-container start
+```
+# Nodeapp install as service
+
+```
+without service start nodeapp do a
+sudo docker-compose up --> mongo-arm_web_1
+to run it forever as a service do the following
+cd /etc/systemd/system
+# Name Service:
+# docker.mongo-arm_web_1.service
+sudo touch docker.mongo-arm_web_1.service
+sudo vi docker.mongo-arm_web_1.service
+````
+to finish vi editor, use these commands
+To insert content in vi press i for insert
+to finish press `ESC` then enter: then 
+enter:`wq!` press enter - this writes & quits vi editor
+
+Content of the file `docker.mongo-arm_web_1.service` (simply press `i` then copy paste to insert):
+
+```
+[Unit]
+Description=mongo-arm_web_1 container
+After=docker.service
+Wants=network-online.target docker.socket
+Requires=docker.socket
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a mongo-arm_web_1
+ExecStop=/usr/bin/docker stop -t 10 mongo-arm_web_1
+
+[Install]
+WantedBy=multi-user.target
+```
