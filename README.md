@@ -4,17 +4,21 @@
 
 # Prerequisites
 
-- Have nodejs > v16 installed https://nodejs.org/en#download
-- Docker desktop installed https://www.docker.com/products/docker-desktop/
-- Mongodb compass https://www.mongodb.com/try/download/compass
-- Rest client e.g. postman https://www.postman.com/ (optional)
+- Have nodejs > v16 installed: https://nodejs.org/en#download
+- Docker desktop installed: https://www.docker.com/products/docker-desktop/
+- Have Mongodb compass installed: https://www.mongodb.com/try/download/compass
+- Use a Rest client e.g. postman: https://www.postman.com/ (optional)
 
 # Build
 
 - cd to this directory
-- To build first run a `npm install` or if you use yarn: `yarn install`
-- first determine docker containers IP, see further down in this readme (stop web container, change, and rerun `./run.sh`)
-- see later in this readme run docker compose, or run: `docker-compose build` and `docker compose up`
+- first determine docker containers IP, see further down in this readme (stop web container, change, and rerun `./run.sh`) (docker on mac locally only)
+- run docker compose, or run: `docker-compose build` and `docker compose up`
+- determine your mongodbcontainers ip and change .env connectionstring and rebuild and rerun!
+- to connect to mongodb container see the steps further down
+
+-  When running nodeapp without docker locally on your machine run:
+- `npm install` or if you use yarn: `yarn install`
 
 # Content of package.json (optional)
 
@@ -28,53 +32,54 @@
 - `npm install swagger-ui-express -save-dev`
 - `npm install uuid -save-dev`
 
+or simply install all with one command via (this should all be already in the webcontainers package.json):
+- `npm install mongo mongoose express cors dotenv swagger-ui-express uuid -save-dev`
+
 # Mongodb official docker images (optional)
 
-- Mongo documentation now official image also for arm64 / apple silicon!
+- Mongo documentation now official image also for arm64 / apple silicon.
 - https://hub.docker.com/_/mongo
 
-# Build & start docker via docker compose
+# Stop & delete, build & start docker via docker compose
 
 - To start the docker image do following:
 - `cd to this directory`
+
+- (optional):
 - `chmod +x ./run.sh`
 - run in a console: `./run.sh`
-- or type in terminal either
 
-- Build / rebuild (delete or stop web-1 (Container_ID via `docker ps`) individually in docker desktop):
+-  (recommended) run in terminal manually:
 
-- `docker-compose build`
-
-- Start the two containers:
-
-- `docker compose up`
-
-# Stop & delete container
-
-- In a new terminal call
+- docker rm / delete, build / rebuild (delete or stop web-1 (Container_ID via `docker ps`) individually in docker desktop):
 - `docker ps` to get Container_ID
 - `docker stop <Container_ID>`
 - `docker rm <Container_ID>`
-- in a terminal call `docker ps` to get Container_ID
-- `docker compose up` to restart the web container
+- `docker-compose build`
+- Start the containers:
+- `docker compose up` // different on ubuntu run `sudo docker-compose up`
 
-# Connect to docker container
+# Connect to docker mongodb container
 
 - Replace <172.19.0.2> in the .env file with your localmachines gateway address (see further down in this README)
-- Connectionstring: `mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
+
+- connectionstring: `mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
+- (or whatever you choose as ://username:password e.g. ://root:example)
 
 # Mongodb client to test db
 
 - input the connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
 - Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
-- (Testing mongodb in https://studio3t.com tryout 30 days, obsolete)
+- (or whatever you choose as ://username:password e.g. ://root:example)
 
-# IMPORTANT: Determine your machines mongodb dockercontainers machineinternal IP
+# Change env files mongodb with correct db ip
 
+IMPORTANT: Determine your machines mongodb dockercontainers machineinternal IP
 - Get gateway address of your mongo container replace ip <172.19.0.2>
 - Nodejs command to connect via mongoose (not needed):
 - `mongoose.connect('mongodb://root:example@172.19.0.2:27017/admin');`
+- (or whatever you choose as ://username:password e.g. ://root:example)
 
 # Access dockercontainers linux shell
 
@@ -82,19 +87,16 @@
 - Replace `mongo-arm-mongo-container-1` with your container name from `docker ps`:
 - In a terminal get on the containers linux:
 - `docker exec -it mongo-arm-mongo-container-1 bash`
+- connect to mongodb commandline interface:
 - `mongosh mongodb://localhost:27017`
 
-# Optional open config via nano in open dockercontainers' internal shell (optional)
+# Set the rights on the mongo commandline interface:
 
-- optional ():
-- (`apt-get update`)
-- (`apt-get install nano`)
-- (`nano /etc/mongod.conf`) --> file doesn't exist, get correct filename
+IMPORTANT: Set correct credentials, run as a must (in the linux shell of the container)
 
+- Must grant user `root` with password `example` access to the `myfirstDatabase` database (or whatever you choose as username & password)?
+- don't mind username & password is machineinternal.
 
-# IMPORTANT: Set correct credentials, run as a must (in the linux shell of the container)
-
-- Must grant user `root` with password `example` access to the `myfirstDatabase` database!
 - In mongodb compass create a db with name `myfirstDatabase` with two collections named `issues` and one `projects`
 - see the credentials defined in docker-compose.yml file!
 - `docker exec -it mongo-arm-mongo-container-1 bash` then:
@@ -110,6 +112,7 @@ db.createUser(
   }
 )
 ````
+- (or set whatever you choose as username & password)
 
 # Determine your mongodb containers host ip something like 172.xx.0.2
  
@@ -117,7 +120,8 @@ db.createUser(
 - `docker inspect mongo-arm-mongo-container-1 `
 - `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
 
-# Content of nodejs' .env file
+# Change MONGODB_URI delete container web-1, build & rerun
+Content of nodejs' .env file
 
 - Need an .env rile in your projects root directory:
 - IMPORTANT in .env file content, replace `172.19.0.2` with containers local gateway ip:
@@ -136,11 +140,25 @@ NODE_ENV=production
 - Sample API call POST http://localhost:3000/api/projects
 - `{ "id": 1, "client_id": "2222", "title": "Bar", "active": false }`
 
-# Demo on free tier oracle cloud arm quadcore
+# Demo on oracle vps stage server
+Free tier oracle cloud arm ampere, 24 GB RAM, 50 GB HD, 4 OCPU
 
 https://keepitnative.xyz/
 
-# Installation Notes for Ubuntu Server
+# Tutorial to install on oracle - best free setup
+
+- https://oracle.com/free signup
+- ! Must see explanation: https://www.youtube.com/watch?v=Hz58Zkke4VE !
+- I chose an installation without hestia, mailbox, wordpress, you can skip those parts
+- use https://www.namecheap.com/ for the nice url 5-10$ / year
+- in case of trouble unning the server contact me 7starch@gmail.com
+
+
+#  Deployment on stage server
+
+Following code is for deployment on stage server e.g. on oracle free tier
+
+Installation Notes for Ubuntu Server
 ```
 sudo apt-get remove docker docker-engine docker.io
 
@@ -148,16 +166,16 @@ sudo apt-get update
 
 sudo apt install docker.io
 
-sudo apt install docker-compose
+sudo apt install docker-compose # is different to macos
 ```
 
-# Some commands differ to the ones on macos
+# docker-compose command is different to the one on macos
 ```
 sudo docker stop mongo-arm_web_1
 
 sudo docker rm mongo-arm_web_1
 
-sudo docker-compose up # note the difference to macos
+sudo docker-compose up # instead of sudo docker compose up
 
 docker exec -it mongo-arm_mongo-container_1 bash 
 
@@ -180,6 +198,8 @@ sudo docker-compose build
 sudo docker-compose up
 ```
 # install services
+
+- to run the containers forever I chose services, to do so do the following:
 
 
 `cd /etc/systemd/system`
@@ -205,14 +225,19 @@ ExecStop=/usr/bin/docker stop -t 10 mongo-arm_mongo-container_1
 WantedBy=multi-user.target
 ```
 
-# to start stop service
+# enable service
+
 ```
 # enable:
 sudo systemctl enable docker.mongo-arm_mongo-container.service
+```
+# to start stop service
+```
 # start / stop
 sudo service docker.docker.mongo-arm_mongo-container stop
 sudo service docker.mongo-arm_mongo-container start
 ```
+
 # Nodeapp install as service
 
 ```
@@ -246,4 +271,91 @@ ExecStop=/usr/bin/docker stop -t 10 mongo-arm_web_1
 
 [Install]
 WantedBy=multi-user.target
+```
+
+# NGINX & Certbot - Swag
+
+To run the services on https on oracle vps, I chose nginx (maps port to 443 / ssl) and certbot (creation ot let's encrypt certificate)
+
+- https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04 (optional reverse proxy)
+ - https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal (optional)
+
+- to use nginx as a reverse proxy by using the swag docker container (recommended bundled nginx & certbot)
+- https://docs.linuxserver.io/general/swag
+- change `sudo vi /etc/nginx/sites-available/default` `i` Copy & paste + `ESC :wq! ENTER`
+- Use your own default file in swag change www.keepitnative.xyz to your own url:
+```
+server {
+    listen      80;
+    server_name localhost keepitnative.xyz www.keepitnative.xyz;
+    # Always redirect to HTTPS
+    return 301 https://keepitnative.xyz$request_uri;
+}
+server {
+        # listen 80;
+        listen 443 ssl;
+        server_name localhost;
+        # redirect 301 https://keepitnative.xyz$request_uri;
+        ssl_certificate /etc/letsencrypt/live/keepitnative.xyz/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/keepitnative.xyz/privkey.pem;
+        # SSL configuration
+        #
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+        #
+        # Note: You should disable gzip for SSL traffic.
+        # See: https://bugs.debian.org/773332
+        #
+        # Read up on ssl_ciphers to ensure a secure configuration.
+        # See: https://bugs.debian.org/765782
+        #
+        # Self signed certs generated by the ssl-cert package
+        # Don't use them in a production server!
+        #
+        # include snippets/snakeoil.conf;
+
+        # root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        # index index.html index.htm index.nginx-debian.html;
+
+        #server_name _;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                # try_files $uri $uri/ =404;
+                proxy_pass http://localhost:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_redirect off;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_cache_bypass $http_upgrade;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        # include snippets/fastcgi-php.conf;
+        #
+        #       # With php7.0-cgi alone:
+        #       fastcgi_pass 127.0.0.1:9000;
+        #       # With php7.0-fpm:
+        #       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        #}
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #       deny all;
+        #}
+}
 ```
