@@ -171,7 +171,7 @@ sudo docker inspect mongo-arm_mongo-container_1
 sudo docker-compose build
 sudo docker-compose up
 ```
-# install services
+# install services for mongodb & nodejs-app
 
 - to run the containers forever I chose services, to do so do the following:
 
