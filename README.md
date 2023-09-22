@@ -69,7 +69,7 @@ NODE_ENV=production
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
 # Connect to mongodb as admin
-- 'mongodb://root:example@172.19.0.2:27017/admin`
+- `mongodb://root:example@172.19.0.2:27017/admin`
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
 # When access to database fails 
@@ -152,7 +152,7 @@ sudo docker rm mongo-arm_web_1
 sudo docker-compose up # instead of sudo docker compose up
 
 docker exec -it mongo-arm_mongo-container_1 bash 
-
+# create the two db collections manually in mongodbs commandline interface
 db.createCollection("issues")
 
 db.createCollection("projects")
