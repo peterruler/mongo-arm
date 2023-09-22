@@ -1,4 +1,4 @@
-# Mongodb on ARM Processors
+# Mongodb & Mongoose Nodejs Backend on ARM Processors
 
 - Nodejs mongodb REST backend that uses docker / docker compose
 
@@ -12,51 +12,45 @@
 # Build
 
 - cd to this directory
-- first determine docker containers IP, see further down in this readme (stop web container, change, and rerun `./run.sh`) (docker on mac locally only)
 - run docker compose, or run: `docker-compose build` and `docker compose up`
-- determine your mongodbcontainers ip and change .env connectionstring and rebuild and rerun!
-- to connect to mongodb container see the steps further down
-
--  When running nodeapp without docker locally on your machine run:
-- `npm install` or if you use yarn: `yarn install`
-
-# Content of package.json (optional)
-
-- Needed nodjs packages already installed after running `npm install`:
-
-- `npm install mongo --save-dev`
-- `npm install mongoose --save-dev`
-- `npm install express -save-dev`
-- `npm install cors -save-dev`
-- `npm install dotenv -save-dev`
-- `npm install swagger-ui-express -save-dev`
-- `npm install uuid -save-dev`
-
-or simply install all with one command via (this should all be already in the webcontainers package.json):
-- `npm install mongo mongoose express cors dotenv swagger-ui-express uuid -save-dev`
-
-# Mongodb official docker images (optional)
-
-- Mongo documentation now official image also for arm64 / apple silicon.
-- https://hub.docker.com/_/mongo
+- determine your mongodbcontainers ip and change .env connectionstring and stop, delete, rebuild and rerun!
+- to connect to mongodb container see the steps further
 
 # Stop & delete, build & start docker via docker compose
 
 - To start the docker image do following:
 - `cd to this directory`
-
-- (optional):
-- `chmod +x ./run.sh`
-- run in a console: `./run.sh`
-
 -  (recommended) run in terminal manually:
 
 - docker rm / delete, build / rebuild (delete or stop web-1 (Container_ID via `docker ps`) individually in docker desktop):
 - `docker ps` to get Container_ID
+- `docker-compose build`
+- `docker compose up`
 - `docker stop <Container_ID>`
 - `docker rm <Container_ID>`
-- `docker-compose build`
-- Start the containers:
+
+
+# Determine your mongodb containers host ip something like 172.xx.0.2
+ 
+- `docker ps` check the name of your container replace mongo-arm-mongo-container-1 with your containers' name
+- `docker inspect mongo-arm-mongo-container-1 `
+- `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
+
+# Change MONGODB_URI delete container web-1, build & rerun
+
+Content of nodejs' .env file
+
+- Need an .env rile in your projects root directory:
+- IMPORTANT in .env file content, replace `172.19.0.2` with containers local gateway ip:
+
+`````
+MONGODB_URI=mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
+PORT=3000
+NODE_ENV=production
+`````
+
+- `docker-compose build` // once again
+- Retart the containers:
 - `docker compose up` // different on ubuntu run `sudo docker-compose up`
 
 # Connect to docker mongodb container
@@ -74,16 +68,12 @@ or simply install all with one command via (this should all be already in the we
 - login to mongodb as admin is possible, but you should connect with your credentials
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
-# Change env files mongodb with correct db ip
-
-IMPORTANT: Determine your machines mongodb dockercontainers machineinternal IP
-- Get gateway address of your mongo container replace ip <172.19.0.2>
-- Nodejs command to connect via mongoose (not needed):
-- `mongoose.connect('mongodb://root:example@172.19.0.2:27017/admin');`
+# Connect to mongodb as admin
+- 'mongodb://root:example@172.19.0.2:27017/admin`
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
-# Access dockercontainers linux shell
-
+# When access to database fails 
+- change rights in dockercontainers linux shell
 - Connect to the shell used to set credentials!
 - Replace `mongo-arm-mongo-container-1` with your container name from `docker ps`:
 - In a terminal get on the containers linux:
@@ -114,23 +104,6 @@ db.createUser(
 )
 ````
 - (or set whatever you choose as username & password)
-
-# Determine your mongodb containers host ip something like 172.xx.0.2
- 
-- `docker ps` check the name of your container replace mongo-arm-mongo-container-1 with your containers' name
-- `docker inspect mongo-arm-mongo-container-1 `
-- `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
-
-# Change MONGODB_URI delete container web-1, build & rerun
-Content of nodejs' .env file
-
-- Need an .env rile in your projects root directory:
-- IMPORTANT in .env file content, replace `172.19.0.2` with containers local gateway ip:
-`````
-MONGODB_URI=mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
-PORT=3000
-NODE_ENV=production
-`````
 
 # Test the api via REST client
 
