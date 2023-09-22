@@ -71,6 +71,7 @@ or simply install all with one command via (this should all be already in the we
 - input the connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
 - Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
+- login to mongodb as admin is possible, but you should connect with your credentials
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
 # Change env files mongodb with correct db ip
