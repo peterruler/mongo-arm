@@ -249,7 +249,7 @@ WantedBy=multi-user.target
 
 # NGINX & Certbot - Swag
 
-To run the services on https on oracle vps, I chose nginx (maps port to 443 / ssl) and certbot (creation ot let's encrypt certificate)
+To run the services on https on oracle vps, I chose nginx (maps port to 443 / ssl) and certbot (creation of let's encrypt certificate)
 
 - https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04 (optional reverse proxy)
  - https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal (optional)
