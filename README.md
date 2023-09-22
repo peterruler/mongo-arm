@@ -125,7 +125,7 @@ https://keepitnative.xyz/
 - ! Must see explanation: https://www.youtube.com/watch?v=Hz58Zkke4VE !
 - I chose an installation without hestia, mailbox, wordpress, you can skip those parts
 - use https://www.namecheap.com/ for the nice url 5-10$ / year
-- in case of trouble unning the server contact me 7starch@gmail.com
+- in case of trouble installing the server contact me 7starch@gmail.com
 
 
 #  Deployment on stage server
