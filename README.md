@@ -7,28 +7,28 @@
 - Have nodejs > v16 installed: https://nodejs.org/en#download
 - Docker desktop installed: https://www.docker.com/products/docker-desktop/
 - Have Mongodb compass installed: https://www.mongodb.com/try/download/compass
-- Use a Rest client e.g. postman: https://www.postman.com/ (optional)
+- Use a REST client e.g. postman: https://www.postman.com/
 
 # Build
 
-- cd to this directory
-- run docker compose, or run: `docker-compose build` and `docker compose up`
-- determine your mongodbcontainers ip and change .env connectionstring and stop, delete, rebuild and rerun!
-- to connect to mongodb container see the steps further
+- `cd to this directory`
+- In a console run `docker-compose build` and `docker compose up` (e.g. in the internal Microsoft Code console)
+- determine your mongodbcontainers ip and change .env connectionstring and build and run, stop, delete, rebuild and rerun!
+- to connect to mongodb container see further steps 
 
 # Stop & delete, build & start docker via docker compose
 
 - To start the docker image do following:
 - `cd to this directory`
--  (recommended) run in terminal manually:
-
-- docker rm / delete, build / rebuild (delete or stop web-1 (Container_ID via `docker ps`) individually in docker desktop):
+- docker build, run, rm / delete `mongo-arm_web_1` (<Container_ID>) container, change .env, build / rebuild
 - `docker ps` to get Container_ID
 - `docker-compose build`
 - `docker compose up`
 - `docker stop <Container_ID>`
 - `docker rm <Container_ID>`
-
+- change .env Mongo URI
+- `docker-compose build`
+- `docker compose up`
 
 # Determine your mongodb containers host ip something like 172.xx.0.2
  
@@ -36,7 +36,7 @@
 - `docker inspect mongo-arm-mongo-container-1 `
 - `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
 
-# Change MONGODB_URI delete container web-1, build & rerun
+# Change MONGODB_URI delete container mongo-arm_web_1, build & rerun
 
 Content of nodejs' .env file
 
@@ -65,10 +65,11 @@ NODE_ENV=production
 - input the connectionstring
 - To test use free better mongodb GUI: https://www.mongodb.com/try/download/compass
 - Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
-- login to mongodb as admin is possible, but you should connect with your credentials
+- `mongodb://localhost:27017/admin` works on your mac as compass connectionstring but not on server
+- login to mongodb , use admin database, to set your credentials
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
-# Connect to mongodb as admin
+# Connect to mongodb with admin table
 - `mongodb://root:example@172.19.0.2:27017/admin`
 - (or whatever you choose as ://username:password e.g. ://root:example)
 
@@ -104,6 +105,9 @@ db.createUser(
 )
 ````
 - (or set whatever you choose as username & password)
+- to exit commandline press enter & exit shell `exit` or `close`
+
+
 
 # Test the api via REST client
 
@@ -112,6 +116,7 @@ db.createUser(
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
 - Sample API call POST http://localhost:3000/api/projects
+- payload:
 - `{ "id": 1, "client_id": "2222", "title": "Bar", "active": false }`
 
 # Demo on oracle vps stage server
@@ -124,9 +129,13 @@ https://keepitnative.xyz/
 - https://oracle.com/free signup
 - ! Must see explanation: https://www.youtube.com/watch?v=Hz58Zkke4VE !
 - I chose an installation without hestia, mailbox, wordpress, you can skip those parts
-- use https://www.namecheap.com/ for the nice url 5-10$ / year
+- use https://www.namecheap.com/ for the nice url 5-10 $ per year
 - in case of trouble installing the server contact me 7starch@gmail.com
-
+- you will need ssh (digital ocean has great tutorials on the topic) login to the servers console & scp (google for it) or git (install git on server and clone repo) to get your data on the server
+- on installation to oracle first get your ssh key and save to your local machine
+- `ssh username@<IP>` see stackoverlow on how to add key
+- upload data from local console to server:
+- `scp -i /localmachine-pathtokey/ssh.pub -r /localmachinepath/mongo-arm ubuntu@<IP>:/home/username/`
 
 #  Deployment on stage server
 
@@ -225,9 +234,9 @@ sudo touch docker.mongo-arm_web_1.service
 sudo vi docker.mongo-arm_web_1.service
 ````
 to finish vi editor, use these commands
-To insert content in vi press i for insert
+To insert content in vi press ì for insert
 to finish press `ESC` then enter: then 
-enter:`wq!` press enter - this writes & quits vi editor
+enter `:wq!` press enter - this writes & quits vi editor
 
 Content of the file `docker.mongo-arm_web_1.service` (simply press `i` then copy paste to insert):
 
@@ -251,10 +260,10 @@ WantedBy=multi-user.target
 
 To run the services on https on oracle vps, I chose nginx (maps port to 443 / ssl) and certbot (creation of let's encrypt certificate)
 
-- https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04 (optional reverse proxy)
- - https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal (optional)
+- https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04 (winthout swag reverse proxy)
+ - https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal (without swag)
 
-- to use nginx as a reverse proxy by using the swag docker container (recommended bundled nginx & certbot)
+- to use nginx as a reverse proxy by using the swag docker container (recommended bundled nginx & certbot, if you're comfy with docker)
 - https://docs.linuxserver.io/general/swag
 - change `sudo vi /etc/nginx/sites-available/default` `i` Copy & paste + `ESC :wq! ENTER`
 - Use your own default file in swag change www.keepitnative.xyz to your own url:
@@ -333,3 +342,5 @@ server {
         #}
 }
 ```
+
+- enjoy & have fun!
