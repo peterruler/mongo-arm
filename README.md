@@ -131,13 +131,16 @@ https://keepitnative.xyz/
 - I chose an installation without hestia, mailbox, wordpress, you can skip those parts
 - use https://www.namecheap.com/ for the nice url 5-10 $ per year
 - in case of trouble installing the server contact me 7starch@gmail.com
+
+#  Deployment to stage server
+
 - you will need ssh (digital ocean has great tutorials on the topic) login to the servers console & scp (google for it) or git (install git on server and clone repo) to get your data on the server
 - on installation to oracle first get your ssh key and save to your local machine
 - `ssh username@<IP>` see stackoverlow on how to add key
 - upload data from local console to server:
 - `scp -i /localmachine-pathtokey/ssh.pub -r /localmachinepath/mongo-arm ubuntu@<IP>:/home/username/`
 
-#  Deployment on stage server
+#  Install docker on stage server
 
 Following code is for deployment on stage server e.g. on oracle free tier
 
