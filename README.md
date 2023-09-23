@@ -30,8 +30,9 @@
 - `docker-compose build`
 - `docker compose up`
 
-# Determine your mongodb containers host ip something like 172.xx.0.2
- 
+# Determine your mongodb containers host ip 
+
+- something like 172.xx.0.2
 - `docker ps` check the name of your container replace mongo-arm-mongo-container-1 with your containers' name
 - `docker inspect mongo-arm-mongo-container-1 `
 - `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
