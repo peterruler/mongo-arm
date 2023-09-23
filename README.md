@@ -85,7 +85,7 @@ NODE_ENV=production
 - connect to mongodb commandline interface:
 - `mongosh mongodb://localhost:27017`
 
-# Set the rights on the mongo commandline interface:
+# Set the rights on the mongo commandline interface
 
 IMPORTANT: Set correct credentials, run as a must (in the linux shell of the container)
 
