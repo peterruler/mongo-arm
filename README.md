@@ -136,9 +136,9 @@ https://keepitnative.xyz/
 
 - you will need ssh (digital ocean has great tutorials on the topic) login to the servers console & scp (google for it) or git (install git on server and clone repo) to get your data on the server
 - on installation to oracle first get your ssh key and save to your local machine
-- `ssh username@<IP>` see stackoverlow on how to add key
+- `ssh <username>@<IP>` see stackoverlow on how to add key
 - upload data from local console to server:
-- `scp -i /localmachine-pathtokey/ssh.pub -r /localmachinepath/mongo-arm ubuntu@<IP>:/home/username/`
+- `scp -i /localmachine-pathtokey/ssh.pub -r /localmachinepath/mongo-arm <username>@<IP>:/home/<username>/`
 
 #  Install docker on stage server
 
