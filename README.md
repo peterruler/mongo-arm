@@ -94,7 +94,7 @@ IMPORTANT: Set correct credentials, run as a must (in the linux shell of the con
 
 - In mongodb compass create a db with name `myfirstDatabase` with two collections named `issues` and one `projects`
 - see the credentials defined in docker-compose.yml file!
-- `docker exec -it mongo-arm-mongo-container-1 bash` then:
+- `docker exec -it mongo-arm-mongo-container_1 bash` then:
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
 - In the shell, type this following full content:
 ````
@@ -108,7 +108,7 @@ db.createUser(
 )
 ````
 - (or set whatever you choose as username & password)
-- to exit commandline press enter & exit shell `exit` or `close`
+- to exit commandline press enter & exit shell type `exit` and press `ENTER` two times
 
 
 
@@ -348,5 +348,9 @@ server {
         #}
 }
 ```
+
+# Troubleshooting
+
+- On port change of db-container: Do stop services first - rebuild web- & db-container with changed port in the .env file. Perform a `docker-compose build --no-cache --pull` do a `sudo docker-compose up` then reload services
 
 - enjoy & have fun!
