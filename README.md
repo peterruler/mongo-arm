@@ -352,5 +352,5 @@ server {
 # Troubleshooting
 
 - On port change of db-container: Do stop services first - rebuild web- & db-container with changed port in the .env file. Perform a `sudo docker-compose build --no-cache --pull` do a `sudo docker-compose up` then reload services
-
+- List services on linux: `sudo systemctl list-units --type=service --all`
 - enjoy & have fun!
