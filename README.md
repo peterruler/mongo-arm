@@ -351,6 +351,6 @@ server {
 
 # Troubleshooting
 
-- On port change of db-container: Do stop services first - rebuild web- & db-container with changed port in the .env file. Perform a `docker-compose build --no-cache --pull` do a `sudo docker-compose up` then reload services
+- On port change of db-container: Do stop services first - rebuild web- & db-container with changed port in the .env file. Perform a `sudo docker-compose build --no-cache --pull` do a `sudo docker-compose up` then reload services
 
 - enjoy & have fun!
