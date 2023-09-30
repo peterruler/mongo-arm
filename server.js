@@ -20,7 +20,6 @@ if (!process.env.MONGODB_URI) {
     throw new Error('Invalid environment variable: "MONGODB_URI"')
 }
 
-
 const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri, {
@@ -32,9 +31,13 @@ mongoose.connect(uri, {
  console.log(`Connected to MongoDB: ${uri}`);
 });
 
+
+const tests  = require('./app/routes/Tests.js');
+app.use('/api/tests', tests);
+
 const api  = require('./app/routes/Api.js');
 app.use('/api', api);
-             
+          
 // Swagger
 
 const options = {};

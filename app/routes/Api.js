@@ -4,20 +4,14 @@ const Issue = require("../models/issue.js");
 const { v4: uuidv4 } = require("uuid");
 
 const router = express.Router();
-router.use(function timeLog(req, res, next) {
-  console.log("Time: ", Date.now());
-  next();
-});
 
 // Projects
 
 router.get("/projects", function (req, res) {
   Project.find(function (err, doc) {
     if (!err) {
-      console.log(doc);
       res.status(200).json(doc);
     } else {
-      console.log(err);
       res.status(500).json(err);
     }
   });
@@ -33,10 +27,8 @@ router.post("/projects", function (req, res) {
   });
   newProject.save(function (err) {
     if (err || req.body.title == "") {
-      console.log("Project konnte nicht gespeichert werden");
       res.status(500).json("undefined");
     } else {
-      console.log("Project gespeichert");
       res
         .status(200)
         .json({
@@ -53,34 +45,19 @@ router.delete("/projects", function (req, res) {
   const id = req.body.id;
   Project.deleteOne({ id: id }, function (err) {
     if (err || id == "" || typeof id === "undefined") {
-      console.log(`Projekt mit id ${id} konnte nicht gelöscht werden`);
       res.status(500).json("undefined");
     } else {
-      console.log(`Projekt mit id ${id} erfolgreich gelöscht`);
       res.status(200).json(id);
     }
   });
-  /*
- Project.deleteMany({ title: "test test" }, function (err) {
-     if (err) {
-         console.log(`Projekt mit id ${id} konnte nicht gelöscht werden`);
-         res.status(500).json("undefined");
-     } else {
-         console.log(`Projekt mit id ${id} erfolgreich gelöscht`);
-         res.status(200).json(id);
-     }
- });
- */
 });
 
 router.get("/projects/:id", function (req, res) {
   const id = req.params.id;
   Project.find({ id: id }, function (err, doc) {
     if (!err) {
-      console.log(doc);
       res.status(200).json(doc);
     } else {
-      console.log(err);
       res.status(500).json(err);
     }
   });
@@ -92,16 +69,14 @@ router.get("/projects/:project_id/issues", function (req, res) {
   const project_id = req.params.project_id;
   Issue.find(function (err, doc) {
     if (!err) {
-      console.log(doc);
       res.status(200).json(doc);
     } else {
-      console.log(err);
       res.status(500).json(err);
     }
   });
 });
 
-router.post("/projects/:project_id/issues", function (req, res) {
+router.post("/projects/:project_id/issues", function (req, res) { 
   const project_id = req.params.project_id;
   const client_id = uuidv4();
   const newIssue = new Issue({
@@ -115,10 +90,8 @@ router.post("/projects/:project_id/issues", function (req, res) {
   });
   newIssue.save(function (err) {
     if (err || req.body.title == "") {
-      console.log("Issue konnte nicht gespeichert werden");
       res.status(500).json("undefined");
     } else {
-      console.log("Issue gespeichert");
       res
         .status(200)
         .json({
@@ -145,14 +118,8 @@ router.delete("/projects/:project_id/issues/:id", function (req, res) {
       client_id == "" ||
       typeof client_id === "undefined"
     ) {
-      console.log(
-        `Issue mit project_id ${project_id} und id ${client_id} konnte nicht gelöscht werden`
-      );
       res.status(500).json("undefined");
     } else {
-      console.log(
-        `Issue mit project_id ${project_id} und id ${client_id} erfolgreich gelöscht`
-      );
       res.status(200).json(client_id);
     }
   });
@@ -167,14 +134,8 @@ router.put("/projects/:project_id/issues/:client_id", function (req, res) {
       const jsonBody = { done: req.body.done }; // hier mehr properties anfügen, um mehr upzudaten
       Issue.updateOne(jsonWhere, jsonBody, function (err, resUpdate) {
         if (err) {
-          console.log(
-            `Issue mit project_id ${project_id} und client_id ${client_id} konnte nicht geändert werden`
-          );
           res.status(500).json("undefined");
         } else {
-          console.log(
-            `Issue mit id ${doc[0]._id}, project_id ${project_id} und client_id ${client_id} erfolgreich geändert`
-          );
           res
             .status(200)
             .json({
@@ -188,8 +149,6 @@ router.put("/projects/:project_id/issues/:client_id", function (req, res) {
             });
         }
       });
-    } else {
-      console.log(err);
     }
   });
 });
