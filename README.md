@@ -186,6 +186,15 @@ sudo docker inspect mongo-arm_mongo-container_1
 sudo docker-compose build
 sudo docker-compose up
 ```
+
+# run docker services in background without usage of linux services
+
+You can skip instaling services part, the -d flag will make it obsolete
+
+```
+sudo docker-compose up -d
+```
+
 # install services for mongodb & nodejs-app
 
 - to run the containers forever I chose services, to do so do the following:
