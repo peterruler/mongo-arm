@@ -31,6 +31,9 @@ mongoose.connect(uri, {
  console.log(`Connected to MongoDB: ${uri}`);
 });
 
+const bookings  = require('./app/routes/Bookings.js');
+app.use('/api/bookings', bookings);
+
 const animals  = require('./app/routes/Animals.js');
 app.use('/api/animals', animals);
 

@@ -360,6 +360,16 @@ server {
 
 # Troubleshooting
 
+# changed ip address of db container
+
 - On IP-address change of db-container: Do stop services first - rebuild web- & db-container with changed address in the .env file. Perform a `sudo docker-compose build --no-cache --pull` do a `sudo docker-compose up` then reload services
 - List services on linux: `sudo systemctl list-units --type=service --all`
+
+# ERROR: failed to solve: error getting credentials - err: exit status 1, out: “
+
+- `sudo vi $HOME/.docker/config.json`
+- The “credsStore” was “desktop” and changed it to “osxkeychain”.
+- `sudo chown -R $(id -u):$(id -g) $HOME/.docker`
+
+
 - enjoy & have fun!
