@@ -12,7 +12,7 @@
 # Build
 
 - `cd to this directory`
-- In a console run `docker-compose build` and `docker compose up` (e.g. in the internal Microsoft Code console)
+- In a console run `sudo docker-compose build` and `sudo docker-compose up -d` (e.g. in the internal Microsoft Code console)
 - determine your mongodbcontainers ip and change .env connectionstring and build and run, stop, delete, rebuild and rerun!
 - to connect to mongodb container see further steps 
 
@@ -21,9 +21,9 @@
 - To start the docker image do following:
 - `cd to this directory`
 - docker build, run, rm / delete `mongo-arm_web_1` (<Container_ID>) container, change .env, build / rebuild
-- `docker ps` to get Container_ID
-- `docker-compose build`
-- `docker compose up`
+- `sudo docker ps` to get Container_ID
+- `sudo docker-compose build`
+- `sudo docker-compose up -d`
 - `docker stop <Container_ID>`
 - `docker rm <Container_ID>`
 - change .env Mongo URI
@@ -34,7 +34,7 @@
 
 - something like 172.xx.0.2
 - `docker ps` check the name of your container replace mongo-arm-mongo-container-1 with your containers' name
-- `docker inspect mongo-arm-mongo-container-1 `
+- `docker inspect mongo-arm-mongo-container-1`
 - `Gateway IP is on my machine: 172.19.0.2 replace with your environments IP` mainly in the .env files' MONGODB_URI
 
 # Change MONGODB_URI 
@@ -47,7 +47,8 @@ Content of nodejs' .env file
 - IMPORTANT in .env file content, replace `172.19.0.2` with containers local gateway ip:
 
 `````
-MONGODB_URI=mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
+# run as db user instead of the dbAdmin root:example
+MONGODB_URI=mongodb://foo:bar@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority
 PORT=3000
 NODE_ENV=production
 `````
@@ -94,10 +95,25 @@ IMPORTANT: Set correct credentials, run as a must (in the linux shell of the con
 
 - In mongodb compass create a db with name `myfirstDatabase` with two collections named `issues` and one `projects`
 - see the credentials defined in docker-compose.yml file!
-- `docker exec -it mongo-arm-mongo-container_1 bash` then:
+- `sudo docker exec -it mongo-arm-mongo-container-1 bash` 
+- on ubuntu:
+`sudo docker exec -it mongo-arm_mongo-container_1 bash`
+then:
 - `mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'` with the `mongosh` command you enter the containers shell
 - In the shell, type this following full content:
-````
+```
+# db string use as regular user:
+use myFirstDatabase
+db.createUser({
+  user: "foo",
+  pwd: "bar",
+  roles: [
+    { role: "readWrite", db: "myFirstDatabase" }
+  ]
+})
+```
+```
+#unsave, but connect via Mongodb Compass
 use myFirstDatabase
 db.createUser(
   {
@@ -114,12 +130,12 @@ db.createUser(
 
 # Test the api via REST client
 
-- To test use a REST client like https://paw.cloud/ or postman https://www.postman.com/:
+- To test use a REST client like postman https://www.postman.com/:
 - In compass load issues and test projects from _Projects folder in this repository.
 - Sample API call to GET http://localhost:3000/api/projects/5e270579-ed2b-475f-a517-ca68713a5b65
 - `id = 5e270579-ed2b-475f-a517-ca68713a5b65`
 - Sample API call POST http://localhost:3000/api/projects
-- payload:
+- on localhost:3000 do a post on swaggerdocu with payload:
 - `{ "id": 1, "client_id": "2222", "title": "Bar", "active": false }`
 
 # Demo on oracle vps stage server
@@ -195,7 +211,7 @@ You can skip instaling services part, the -d flag will make it obsolete
 sudo docker-compose up -d
 ```
 
-# install services for mongodb & nodejs-app
+# [OPTIONAL] install services for mongodb & nodejs-app
 
 - to run the containers forever I chose services, to do so do the following:
 
@@ -223,20 +239,20 @@ ExecStop=/usr/bin/docker stop -t 10 mongo-arm_mongo-container_1
 WantedBy=multi-user.target
 ```
 
-# enable service
+# [OPTIONAL] enable service
 
 ```
-# enable:
+# [OPTIONAL] enable:
 sudo systemctl enable docker.mongo-arm_mongo-container.service
 ```
-# to start stop service
+# [OPTIONAL] to start stop service
 ```
 # start / stop
 sudo service docker.docker.mongo-arm_mongo-container stop
 sudo service docker.mongo-arm_mongo-container start
 ```
 
-# Nodeapp install as service
+# [OPTIONAL] Nodeapp install as service
 
 ```
 without service start nodeapp do a
@@ -358,11 +374,11 @@ server {
 }
 ```
 
-# Troubleshooting
-
+# [IMPORTANT] Troubleshooting
+## do after changing mongodb
 # changed ip address of db container
 
-- On IP-address change of db-container: Do stop services first - rebuild web- & db-container with changed address in the .env file. Perform a `sudo docker-compose build --no-cache --pull` do a `sudo docker-compose up` then reload services
+- On IP-address change of db-container: Do stop services first - rebuild web- & db-container with changed address in the .env file. Perform a `sudo docker-compose build --no-cache --pull` do a `sudo docker-compose up -d` then reload services
 - List services on linux: `sudo systemctl list-units --type=service --all`
 
 # ERROR: failed to solve: error getting credentials - err: exit status 1, out: “
@@ -372,4 +388,4 @@ server {
 - `sudo chown -R $(id -u):$(id -g) $HOME/.docker`
 
 
-- enjoy & have fun!
+# enjoy & have fun!
