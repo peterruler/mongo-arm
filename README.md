@@ -122,6 +122,9 @@ db.createUser(
     roles: [ "readWrite", "dbAdmin" ]
   }
 )
+use admin
+db.dropUser("root")
+
 ````
 - (or set whatever you choose as username & password)
 - to exit commandline press enter & exit shell type `exit` and press `ENTER` two times
