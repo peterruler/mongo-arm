@@ -61,8 +61,8 @@ NODE_ENV=production
 
 - Replace <172.19.0.2> in the .env file with your localmachines gateway address (see further down in this README)
 
-- connectionstring: `mongodb://root:example@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
-- (or whatever you choose as ://username:password e.g. ://root:example)
+- connectionstring: `mongodb://foo:bar@172.19.0.2:27017/myFirstDatabase?retryWrites=true&w=majority`
+- (or whatever you choose as ://username:password e.g. ://foo:bar)
 
 # Mongodb client to test db
 
@@ -71,7 +71,7 @@ NODE_ENV=production
 - Enter connectionstring: `mongodb://root:example@172.19.0.2:27017/admin`
 - `mongodb://localhost:27017/admin` works on your mac as compass connectionstring but not on server
 - login to mongodb , use admin database, to set your credentials
-- (or whatever you choose as ://username:password e.g. ://root:example)
+- (or whatever you choose as ://username:password e.g. ://foo:bar)
 
 # Connect to mongodb with admin table
 - `mongodb://root:example@172.19.0.2:27017/admin`
