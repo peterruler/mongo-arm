@@ -63,7 +63,7 @@ sudo apt install docker.io
 
 sudo apt install docker-compose # is different to macos
 
-# cd to pwd % do a 
+# cd to pwd & do a 
 npm install
 ```
 
