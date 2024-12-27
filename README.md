@@ -62,6 +62,9 @@ sudo apt-get update
 sudo apt install docker.io
 
 sudo apt install docker-compose # is different to macos
+
+# cd to pwd % do a 
+npm install
 ```
 
 # docker-compose command is different to the one on macos
