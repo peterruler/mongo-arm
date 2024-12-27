@@ -11,7 +11,7 @@
 - Have nodejs latest installed: https://nodejs.org/en#download
 
 # Build
-
+- `npm install`
 - `sudo docker compose --build`
 - `sudo docker compose up -d` //in detached / background mode
 
