@@ -1,4 +1,4 @@
-[{
+db.users.insertMany([{
   "_id": {
     "$oid": "63b85145f46d145cbdff89f5"
   },
@@ -327,4 +327,4 @@
   },
   "priority": "1",
   "__v": 0
-}]
+}])

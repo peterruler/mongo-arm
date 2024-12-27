@@ -1,0 +1,13 @@
+db.bookings.insertOne({
+    "id" : 1,
+    "name": "Peter S",
+    "roomNumber": 100,
+    "startDate": "2023-10-12 00:00:00",
+    "endDate": "2023-10-12 00:00:00"
+})
+sudo docker exec -it mongo-arm_mongo-container_1 bash
+
+mongosh --port 27017 -u root -p 'example' --authenticationDatabase 'admin'
+
+sudo docker-compose build --no-cache --pull
+sudo docker-compose up -d --force-recreate

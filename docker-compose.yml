@@ -1,20 +1,25 @@
-version: '3.1'
+version: '3'
 services:
+  mongo_db:
+    container_name: database_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_db:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
   web:
     build: .
     ports:
-    - "3000:3000"
-    depends_on:
-    - mongo-container
-  mongo-container:
-    image: mongo:latest
+    - 3000:3000
     environment:
-        - MONGO_INITDB_ROOT_USERNAME=root
-        - MONGO_INITDB_ROOT_PASSWORD=example
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # Here you are setting the username and password
-        # so change it to whatever you want
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ports:
-      - "27017:27017"
-    command: mongod
+      MONGODB_URI:  mongodb://root:example@mongo_db:27017/myFirstDatabase?authSource=admin
+      PORT: 3000
+      NODE_ENV: production
+    depends_on:
+    - mongo_db
+volumes:
+  mongo_db: {}
