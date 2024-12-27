@@ -12,7 +12,7 @@
 
 # Build
 
-- `sudo docker compose up --build`
+- `sudo docker compose --build`
 - `sudo docker compose up -d` //in detached / background mode
 
 # Verify connection
@@ -70,6 +70,8 @@ sudo docker stop mongo-arm-web-1
 
 sudo docker rm mongo-arm-web-1
 
+sudo docker-compose --build
+
 sudo docker-compose up -d 0# instead of sudo docker compose up
 
 docker exec -it database_container bash
@@ -122,6 +124,7 @@ volumes:
 ```
 
 # Dockerfile
+
 ```
 FROM node:alpine
 
