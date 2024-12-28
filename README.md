@@ -22,7 +22,7 @@
 # Verify connection
 
 - `sudo docker exec -it database_container mongosh --authenticationDatabase admin -u root -p example`
-- `>show dbs;`
+- `show dbs;`
 
 # Test
 
