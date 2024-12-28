@@ -28,7 +28,7 @@
 
 # Stop & delete docker containers
 
-- `sudo docker compose down`
+- `sudo docker compose down -v`
 
 # Tutorial on use mongodb in docker in a good explanation:
 - https://www.youtube.com/watch?v=YBPzt4Z-0dQ

@@ -1,25 +1,26 @@
-version: '3'
+version: '3.4'
 services:
   mongo_db:
     container_name: database_container
-    image: mongo:latest
+    image: mongo:6.0.6
     restart: always
-    ports:
-      - "27017:27017"
     volumes:
       - mongo_db:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
+    ports:
+      - 27017:27017
   web:
     build: .
     ports:
-    - 3000:3000
+      - 3000:3000
     environment:
-      MONGODB_URI:  mongodb://root:example@mongo_db:27017/myFirstDatabase?authSource=admin
+      MONGODB_URI: mongodb://myUser:myPassword@mongo_db:27017/myFirstDatabase?authSource=myFirstDatabase
       PORT: 3000
       NODE_ENV: production
     depends_on:
-    - mongo_db
+      - mongo_db
 volumes:
   mongo_db: {}
