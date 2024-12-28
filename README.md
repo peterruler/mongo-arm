@@ -45,6 +45,10 @@
 - use https://www.namecheap.com/ for the nice url 5-10 $ per year
 - in case of trouble installing the server contact me 7starch@gmail.com
 
+# SSL support
+- I use https://certbot.eff.org/
+- and Nginx as a reverse proxy
+
 #  Deployment to stage server
 
 - you will need ssh (digital ocean has great tutorials on the topic) login to the servers console & scp (google for it) or git (install git on server and clone repo) to get your data on the server
