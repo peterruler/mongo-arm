@@ -14,7 +14,7 @@
 
 
 # Build
-
+- in a terminal cd to this projects directory.
 - `sudo docker compose --build`
 
 # Start containers in detached / background mode
@@ -52,7 +52,7 @@
 - and Nginx as a reverse proxy
 
 #  Deployment to stage server
-- VERY IMPORTANT: wuring the installation on your oracle cloudinstance - you first get your ssh key - copy it & save to your local machine and store it in /Users/<username>/.ssh folder
+- VERY IMPORTANT: wuring the installation on your oracle cloudinstance - you first get your ssh key - copy it & save to your local machine and store it in the `/Users/<username>/.ssh` folder
 - you will need ssh (digital ocean has great tutorials on the topic) login to the servers console & scp (google for it) or git (install git on server and clone repo) to get your data on the server
 - `ssh <username>@<IP>` see stackoverlow on how to add key
 - upload data from local console to server:
