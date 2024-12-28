@@ -7,6 +7,8 @@
 # Prerequisites
 
 - Have nodejs latest installed: https://nodejs.org/en#download
+- Install docker desktop (Mac): https://docs.docker.com/desktop/setup/install/mac-install/
+- Install docker desktop (PC): https://docs.docker.com/desktop/setup/install/windows-install/
 - Mongodb compass installed (optional): https://www.mongodb.com/try/download/compass
 - Use a REST client e.g. postman (optional): https://www.postman.com/
 
