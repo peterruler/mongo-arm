@@ -14,11 +14,14 @@
 # Build
 
 - `sudo docker compose --build`
-- `sudo docker compose up -d` // in detached / background mode
+
+# Start containers in detached / background mode
+
+- `sudo docker compose up -d`
 
 # Verify connection
 
-- `docker exec -it database_container mongosh --authenticationDatabase admin -u root -p example`
+- `sudo docker exec -it database_container mongosh --authenticationDatabase admin -u root -p example`
 - `>show dbs;`
 
 # Test
