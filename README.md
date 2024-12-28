@@ -2,18 +2,19 @@
 
 # Description
 
-- Nodejs mongodb REST backend that uses docker / docker compose and deployment to oracle free tier cloud server
+- This is a Nodejs mongodb REST backend that uses docker / docker compose and shows optional deployment to oracle free tier cloud server
 
 # Prerequisites
 
-- Mongodb compass installed: https://www.mongodb.com/try/download/compass
-- Use a REST client e.g. postman: https://www.postman.com/
 - Have nodejs latest installed: https://nodejs.org/en#download
+- Mongodb compass installed (optional): https://www.mongodb.com/try/download/compass
+- Use a REST client e.g. postman (optional): https://www.postman.com/
+
 
 # Build
-- `npm install`
+
 - `sudo docker compose --build`
-- `sudo docker compose up -d` //in detached / background mode
+- `sudo docker compose up -d` // in detached / background mode
 
 # Verify connection
 
@@ -22,7 +23,7 @@
 
 # Test
 
-- call `localhost:3000` in a webbrowser on swaggerdocu use the payload:
+- call `localhost:3000` in a webbrowser in the swagger-docu and use the payload:
 - `{ "id": 1, "client_id": "2222", "title": "Bar", "active": false }`
 - choose post projects add payload in the textfield and hit execute! A status code 200 should result!
 
@@ -63,8 +64,7 @@ sudo apt install docker.io
 
 sudo apt install docker-compose # is different to macos
 
-# cd to pwd & do a 
-npm install
+sudo systemctl start docker
 ```
 
 # docker-compose command is different to the one on macos
@@ -75,7 +75,7 @@ sudo docker rm mongo-arm-web-1
 
 sudo docker-compose --build
 
-sudo docker-compose up -d 0# instead of sudo docker compose up
+sudo docker-compose up -d # instead of sudo docker compose up
 
 docker exec -it database_container bash
 
@@ -84,7 +84,7 @@ docker exec -it database_container bash
 ```
 #!/bin/bash
 sudo docker-compose build
-sudo docker-compose up -d #note this is different to macos m1
+sudo docker-compose up -d # note this is different to macos m1
 sudo docker ps
 sudo docker inspect database_container
 sudo docker exec -it database_container bash
@@ -134,7 +134,7 @@ FROM node:alpine
 # Create app directory
 WORKDIR /usr/src/app
 
-# Co0py dependencies 
+# Copy dependencies 
 COPY package*.json ./
 
 # Install dependencies 
