@@ -37,8 +37,8 @@
 # Tutorial on use mongodb in docker in a good explanation:
 - https://www.youtube.com/watch?v=YBPzt4Z-0dQ
 
-# Tutorial to install on oracle - best free setup
-
+# Tutorial to install oracle free tier cloudserver - best free setup
+- it offers 24GB RAM, 4 ARM OCPUs
 - https://oracle.com/free signup
 - ! Must see explanation: https://www.youtube.com/watch?v=Hz58Zkke4VE !
 - I chose an installation without hestia, mailbox, wordpress, you can skip those parts
